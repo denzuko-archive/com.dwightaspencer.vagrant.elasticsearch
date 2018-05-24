@@ -4,6 +4,10 @@
   become: True
   remote_user: vagrant
   roles:
+  ## - syslogger
+  ## - snmp / apm
+  ## - hids
+  ## - antivirus
      - denzuko-ansible-roles.elasticsearch
 
 # vim:ft=ansible:sts=4:ts=4:et:cin:ai:sw=4:
