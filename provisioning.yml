@@ -3,16 +3,17 @@
   hosts: all
   sudo: yes
   remote_user: vagrant
-
+  roles:
+     - role: cmprescott.jre
+     
   tasks:
-    - name: (feature) Include JRE 1.8
-      yum: name=/tmp/jre-8u51-linux-x64.rpm state=present
 
     - name: (chore) Install Elastic Repository
       copy: src=/tmp/elasticsearch.repo dest=/etc/yum.repos.d/elasticsearch.repo
 
     - name: (chore) Add gpg for elasticserach
-      rpm_key: state=present key=http://packages.elasticsearch.org/GPG-KEY-elasticsearch
+      rpm_key: state=present key=https://artifacts.elastic.co/GPG-KEY-elasticsearch
+
 
     - name: (feature) Include ElasticSearch
       yum: name=elasticsearch enablerepo=elasticsearch state=latest
