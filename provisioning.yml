@@ -1,10 +1,9 @@
 ---
 - name: Provision ElasticSearch VagrantBox
   hosts: all
-  sudo: yes
+  become: True
   remote_user: vagrant
   roles:
-     - role: cmprescott.jre
-     - role: denzuko-ansible-roles/elasticsearch
+     - denzuko-ansible-roles.elasticsearch
 
 # vim:ft=ansible:sts=4:ts=4:et:cin:ai:sw=4:
