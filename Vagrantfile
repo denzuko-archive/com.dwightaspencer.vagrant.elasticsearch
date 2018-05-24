@@ -13,7 +13,8 @@ Vagrant.configure(2) do |config|
     vb.cpus = 2
   end
 
-  config.vm.network :forwarded_port, guest: 80, host: 9300
+  config.vm.network :forwarded_port, guest: 80, host: 9200
+  config.vm.network :forwarded_port, guest: 9300, host: 9300
 
   config.vm.provision   :file,
 	                source: 'ansible.cfg',
@@ -30,14 +31,6 @@ Vagrant.configure(2) do |config|
   config.vm.provision	:file,
 			source: "provisioning.yml",
 			destination: "/tmp/provisioning.yml"
-
-  config.vm.provision 	:file,
-			source: "elasticsearch.repo",
-			destination: "/tmp/elasticsearch.repo"
-
-  config.vm.provision 	:file,
-		      	source: "elasticsearch.yml",
-		      	destination: "/tmp/elasticsearch.yml"
 
   config.vm.provision :shell, inline: <<-SHELL
     sudo yum -y install epel-release 
