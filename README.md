@@ -6,7 +6,6 @@ Elastic Search base image with CentOS 7, EPEL, Ansible, and ElasticSearch 6.x
 # Dependencies
 ------------
 
- * [cmprescott/jre](https://galaxy.ansible.com/cmprescott/jre/) from ansible galaxy
  * [denzuko-ansible-roles/elasticsearch](https://galaxy.ansible.com/denzuko-ansible-roles/elasticsearch/) from ansible galaxy
 
 
