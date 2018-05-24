@@ -15,6 +15,10 @@ Vagrant.configure(2) do |config|
 
   config.vm.network :forwarded_port, guest: 80, host: 9300
 
+  config.vm.provision   :file,
+	                source: 'ansible.cfg',
+	                destination: '/tmp/ansible.cfg'
+
   config.vm.provision	:file,
 			source: "inventory.ini",
 			destination: "/tmp/inventory.ini"
@@ -40,10 +44,7 @@ Vagrant.configure(2) do |config|
     sudo sed -i 's/https/http/' /etc/yum.repos.d/epel.repo
     sudo yum --enablerepo=epel -y update
     sudo yum -y install ansible
-    if [ -x /etc/ansible ]; then
-    	sudo install --mode=644 /tmp/inventory.ini /etc/ansible/hosts
-	sudo ansible-playbook /tmp/provisioning.yml
-     fi
+    cd /tmp && sudo ansible-playbook /tmp/provisioning.yml
   SHELL
 
 end
