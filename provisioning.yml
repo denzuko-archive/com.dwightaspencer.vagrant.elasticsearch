@@ -5,45 +5,6 @@
   remote_user: vagrant
   roles:
      - role: cmprescott.jre
-     
-  tasks:
-
-    - name: (chore) Install Elastic Repository
-      copy: src=/tmp/elasticsearch.repo dest=/etc/yum.repos.d/elasticsearch.repo
-
-    - name: (chore) Add gpg for elasticserach
-      rpm_key: state=present key=https://artifacts.elastic.co/GPG-KEY-elasticsearch
-
-
-    - name: (feature) Include ElasticSearch
-      yum: name=elasticsearch enablerepo=elasticsearch state=latest
-
-    - name: (feature) Use predefined configuration for ElasticSearch
-      copy: src=/tmp/elasticsearch.yml dest=/etc/elasticsearch/elasticsearch.yml
-        
-    - name: (feature) ElasticSearch service unattended startup
-      service: name=elasticsearch.service state=started enabled=yes
-
-    - name: (chore) Verify service is accessable on tcp port 9300
-      uri:
-        url: http://localhost:9300/
-        method: GET
-
-    - name: (chore) Insert demo data for testing
-      uri:
-        url: http://localhost:9300/company/employees/1
-        method: POST
-        body: '{"first_name": "Mary", "last_name": "Kay"}'
-        body_format: json
-
-    - name: (chore) Verify demo data is returning as expected
-      uri:
-        url: http://localhost:9300/company/employees/_search/?q=last_name=Kay
-        method: GET
-
-    - name: (chore) Purge demo data
-      uri:
-         url: http://localhost:9300/company/employees/1
-         method: DELETE
+     - role: denzuko-ansible-roles/elasticsearch
 
 # vim:ft=ansible:sts=4:ts=4:et:cin:ai:sw=4:
