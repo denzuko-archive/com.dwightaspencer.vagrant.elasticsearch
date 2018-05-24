@@ -1,5 +1,5 @@
 # elasticsearch
-Elastic Search base image with CentOS 7, EPEL, Ansible, and ElasticSearch 1.7
+Elastic Search base image with CentOS 7, EPEL, Ansible, and ElasticSearch 6.x
 
 
 ## Deploy
