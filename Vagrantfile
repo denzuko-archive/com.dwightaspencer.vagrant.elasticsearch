@@ -9,8 +9,8 @@ Vagrant.configure(2) do |config|
   
   config.vm.provider :virtualbox do |vb|
     vb.gui = false
-    vb.memory = "2048"
-    vb.cpus = 1
+    vb.memory = "4098"
+    vb.cpus = 2
   end
 
   config.vm.network :forwarded_port, guest: 80, host: 9300
@@ -18,6 +18,10 @@ Vagrant.configure(2) do |config|
   config.vm.provision	:file,
 			source: "inventory.ini",
 			destination: "/tmp/inventory.ini"
+
+  config.vm.provision   :file,
+			source: "requirements.yml",
+			destination: "/tmp/requirements.yml"
 
   config.vm.provision	:file,
 			source: "provisioning.yml",
@@ -30,10 +34,6 @@ Vagrant.configure(2) do |config|
   config.vm.provision 	:file,
 		      	source: "elasticsearch.yml",
 		      	destination: "/tmp/elasticsearch.yml"
-
-  config.vm.provision 	:file,
-  		      	source: "jre-8u51-linux-x64.rpm", 
-  		      	destination: "/tmp/jre-8u51-linux-x64.rpm"
 
   config.vm.provision :shell, inline: <<-SHELL
     sudo yum -y install epel-release 
